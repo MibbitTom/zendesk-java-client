@@ -3393,7 +3393,7 @@ public class Zendesk implements Closeable {
   // Helper methods
   //////////////////////////////////////////////////////////////////////
 
-  private byte[] json(Object object) {
+  protected byte[] json(Object object) {
     try {
       return mapper.writeValueAsBytes(object);
     } catch (JsonProcessingException e) {
@@ -3401,7 +3401,7 @@ public class Zendesk implements Closeable {
     }
   }
 
-  private <T> ListenableFuture<T> submit(
+  protected <T> ListenableFuture<T> submit(
       Request request, ZendeskAsyncCompletionHandler<T> handler) {
     if (logger.isDebugEnabled()) {
       if (request.getStringData() != null) {
@@ -3432,15 +3432,15 @@ public class Zendesk implements Closeable {
     }
   }
 
-  private Request req(String method, Uri template) {
+  protected Request req(String method, Uri template) {
     return req(method, template.toString());
   }
 
-  private Request req(String method, String url) {
+  protected Request req(String method, String url) {
     return reqBuilder(method, url).build();
   }
 
-  private Request req(String method, Uri template, String contentType, byte[] body) {
+  protected Request req(String method, Uri template, String contentType, byte[] body) {
     RequestBuilder builder = reqBuilder(method, template.toString());
     builder.addHeader("Content-type", contentType);
     builder.setBody(body);
@@ -3791,11 +3791,11 @@ public class Zendesk implements Closeable {
     };
   }
 
-  private TemplateUri tmpl(String template) {
+  protected TemplateUri tmpl(String template) {
     return new TemplateUri(url + template);
   }
 
-  private TemplateUri cbp(String path) {
+  protected TemplateUri cbp(String path) {
     Objects.requireNonNull(path, "Path cannot be null");
     if (path.indexOf('?') != -1) {
       throw new IllegalArgumentException("Path cannot contain a query string");
@@ -3803,7 +3803,7 @@ public class Zendesk implements Closeable {
     return new TemplateUri(url + path + "?page[size]={pageSize}").set("pageSize", cbpPageSize);
   }
 
-  private Uri cnst(String template) {
+  protected Uri cnst(String template) {
     return new FixedUri(url + template);
   }
 
@@ -3846,7 +3846,7 @@ public class Zendesk implements Closeable {
   // Static helper methods
   //////////////////////////////////////////////////////////////////////
 
-  private static <T> T complete(ListenableFuture<T> future) {
+  protected static <T> T complete(ListenableFuture<T> future) {
     try {
       return future.get();
     } catch (InterruptedException e) {
