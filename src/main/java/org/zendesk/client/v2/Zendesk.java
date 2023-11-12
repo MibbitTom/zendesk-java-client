@@ -154,7 +154,7 @@ public class Zendesk implements Closeable {
     return Collections.unmodifiableMap(result);
   }
 
-  private Zendesk(
+  public Zendesk(
       AsyncHttpClient client,
       String url,
       String username,
