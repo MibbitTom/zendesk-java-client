@@ -2394,7 +2394,9 @@ public class Zendesk implements Closeable {
     return getSearchResults(type, query, Collections.emptyMap());
   }
 
-  /** @deprecated Use {@link #getSearchResults(Class, String, Map)} instead. */
+  /**
+   * @deprecated Use {@link #getSearchResults(Class, String, Map)} instead.
+   */
   @Deprecated
   public <T extends SearchResultEntity> Iterable<T> getSearchResults(
       Class<T> type, String query, String params) {
@@ -2864,7 +2866,9 @@ public class Zendesk implements Closeable {
     return complete(submit(req("GET", cnst("/help_center/locales.json")), handle(Locales.class)));
   }
 
-  /** @deprecated Use {@link Zendesk#listHelpCenterLocales()} instead */
+  /**
+   * @deprecated Use {@link Zendesk#listHelpCenterLocales()} instead
+   */
   @Deprecated
   public List<String> getHelpCenterLocales() {
     return listHelpCenterLocales().getLocales();
@@ -3421,7 +3425,8 @@ public class Zendesk implements Closeable {
     return client.executeRequest(request, handler);
   }
 
-  protected abstract static class ZendeskAsyncCompletionHandler<T> extends AsyncCompletionHandler<T> {
+  protected abstract static class ZendeskAsyncCompletionHandler<T>
+      extends AsyncCompletionHandler<T> {
     @Override
     public void onThrowable(Throwable t) {
       if (t instanceof IOException) {
