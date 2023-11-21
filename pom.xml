@@ -91,7 +91,6 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <spotless.version>2.30.0</spotless.version>
   </properties>
 
   <dependencyManagement>
@@ -266,40 +265,11 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>com.diffplug.spotless</groupId>
-        <artifactId>spotless-maven-plugin</artifactId>
-        <version>${spotless.version}</version>
-        <configuration>
-          <java>
-            <toggleOffOn>
-              <off>@formatter:off</off>
-              <on>@formatter:on</on>
-            </toggleOffOn>
-            <googleJavaFormat/>
-            <importOrder/>
-            <removeUnusedImports/>
-            <formatAnnotations/>
-          </java>
-          <pom>
-            <sortPom>
-              <expandEmptyElements>false</expandEmptyElements>
-            </sortPom>
-          </pom>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
-          <completionGoals>spotless:apply verify</completionGoals>
-          <preparationGoals>spotless:apply verify</preparationGoals>
+          <completionGoals>verify</completionGoals>
+          <preparationGoals>verify</preparationGoals>
         </configuration>
       </plugin>
     </plugins>
