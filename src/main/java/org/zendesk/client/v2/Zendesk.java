@@ -3421,7 +3421,7 @@ public class Zendesk implements Closeable {
     return client.executeRequest(request, handler);
   }
 
-  private abstract static class ZendeskAsyncCompletionHandler<T> extends AsyncCompletionHandler<T> {
+  protected abstract static class ZendeskAsyncCompletionHandler<T> extends AsyncCompletionHandler<T> {
     @Override
     public void onThrowable(Throwable t) {
       if (t instanceof IOException) {
